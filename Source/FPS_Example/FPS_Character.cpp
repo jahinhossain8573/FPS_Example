@@ -9,6 +9,9 @@ AFPS_Character::AFPS_Character()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	//Makes the jumping more realistic
+	/*GetCharacterMovement()->GravityScale = 2.5f;
+	GetCharacterMovement()->JumpZVelocity = 620;*/
 }
 
 // Called when the game starts or when spawned
@@ -40,6 +43,11 @@ void AFPS_Character::MoveRight(float Value)
 	FVector Direction = FRotationMatrix(Controller->GetControlRotation()).GetScaledAxis(EAxis::Y);
 	AddMovementInput(Direction, Value);
 }
+
+/*void AFPS_Character::Jump()
+{
+	Jump
+}*/
 
 void AFPS_Character::StartSprinting()
 {
@@ -167,7 +175,7 @@ void AFPS_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("LookUp", this, &AFPS_Character::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("LookRight", this, &AFPS_Character::AddControllerYawInput);
 
-
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AFPS_Character::Jump);
 	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &AFPS_Character::StartSprinting);
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &AFPS_Character::StopSprinting);
 

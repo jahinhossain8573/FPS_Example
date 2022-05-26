@@ -106,6 +106,9 @@ public:
 	UFUNCTION()
 		void MoveRight(float Value);
 
+	/*UFUNCTION()
+		void Jump();*/
+
 	UFUNCTION()
 		void StartSprinting();
 
