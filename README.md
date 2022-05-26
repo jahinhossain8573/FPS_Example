@@ -9,8 +9,10 @@ I am currently using the FPS Assault Pack which costs 14.99$, but I will be repl
  - Reloading (Along with proper Animations)
  - Ammo Management
 
-### To do:
+ ### In progress
  - Jumping
+
+### To do:
  - Physics based shooting system using raycast
  - IK based animation system
  - Vaulting
