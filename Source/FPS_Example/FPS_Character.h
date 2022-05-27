@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
+#include "CustomCharacterMovementComponent.h"
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
 #include "Math/UnrealMathUtility.h"
@@ -92,7 +93,6 @@ public:
 		UAnimMontage* GunReloadingMontage;
 	UPROPERTY(BlueprintReadWrite)
 		UAnimMontage* GunReloadingMontageEmpty;
-
 	
 	//Timers
 	FTimerHandle AutoFireHandle;
@@ -106,8 +106,8 @@ public:
 	UFUNCTION()
 		void MoveRight(float Value);
 
-	/*UFUNCTION()
-		void Jump();*/
+	UFUNCTION()
+		void CustomJump();
 
 	UFUNCTION()
 		void StartSprinting();
