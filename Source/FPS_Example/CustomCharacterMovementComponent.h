@@ -18,11 +18,12 @@ public:
 	//Curves
 	UPROPERTY(EditAnywhere)
 		UCurveFloat* JumpCurve;
+	
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	virtual void Tick(float DeltaTime, ELevelTick tick_type, FActorComponentTickFunction* tickFunction) override;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* TickFunction) override;
 	virtual bool DoJump(bool bReplayingMoves) override;
 
 private:

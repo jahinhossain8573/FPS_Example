@@ -2,6 +2,7 @@
 
 
 #include "CustomCharacterMovementComponent.h"
+#include "Runtime/Engine/Classes/Kismet/KismetSystemLibrary.h"
 
 #include "GameFramework/Character.h"
 
@@ -14,9 +15,25 @@ void UCustomCharacterMovementComponent::BeginPlay()
 	}
 }
 
-void UCustomCharacterMovementComponent::Tick(float DeltaTime, ELevelTick tick_type, FActorComponentTickFunction* tickFunction)
+void UCustomCharacterMovementComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* TickFunction)
 {
-	Super::TickComponent(DeltaTime, tick_type, tickFunction);
+	Super::TickComponent(DeltaTime, TickType, TickFunction);
+
+	if (isJumping && JumpCurve)
+	{
+		jumpTime += DeltaTime;
+
+		if (jumpTime <= jumpMaxTime)
+		{
+			float jumpCurveValue = JumpCurve->GetFloatValue(jumpTime);
+			float jumpCurveValueDelta = jumpCurveValue - prevJumpCurveValue;
+
+			Velocity.Z = jumpCurveValueDelta / DeltaTime;
+
+			FVector actorLocation = GetActorLocation();
+			FVector destinatioLocation = actorLocation + FVector(0.0F, 0.0F, jumpCurveValueDelta);
+		}
+	}
 }
 
 bool UCustomCharacterMovementComponent::DoJump(bool bReplayingMoves)
