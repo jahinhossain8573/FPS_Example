@@ -28,7 +28,7 @@ void AFPS_Character::MoveForward(float Value)
 {
 	// Find out which way is "forward" and record that the player wants to move that way.
 	
-	FRotator CharacterRotation = this->GetActorRotation();
+	FRotator &&CharacterRotation = this->GetActorRotation();
 	CharacterRotation.Pitch = 0;
 	FVector Direction = UKismetMathLibrary::GetForwardVector(CharacterRotation);
 
