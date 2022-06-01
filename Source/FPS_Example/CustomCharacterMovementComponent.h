@@ -16,7 +16,7 @@ class FPS_EXAMPLE_API UCustomCharacterMovementComponent : public UCharacterMovem
 
 public:
 	//Curves
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(BlueprintReadWrite)
 		UCurveFloat* JumpCurve;
 	
 
