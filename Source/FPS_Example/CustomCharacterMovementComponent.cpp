@@ -31,7 +31,7 @@ void UCustomCharacterMovementComponent::TickComponent(float DeltaTime, ELevelTic
 			Velocity.Z = jumpCurveValueDelta / DeltaTime;
 
 			FVector actorLocation = GetActorLocation();
-			FVector destinatioLocation = actorLocation + FVector(0.0F, 0.0F, jumpCurveValueDelta);
+			FVector destinationLocation = actorLocation + FVector(0.0F, 0.0F, jumpCurveValueDelta);
 		}
 	}
 }

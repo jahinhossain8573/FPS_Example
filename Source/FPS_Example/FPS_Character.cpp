@@ -4,7 +4,8 @@
 #include "FPS_Character.h"
 
 // Sets default values
-AFPS_Character::AFPS_Character()
+AFPS_Character::AFPS_Character(const FObjectInitializer& objInit)
+	:Super(objInit.SetDefaultSubobjectClass<UCustomCharacterMovementComponent>(ACharacter::CharacterMovementComponentName))
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;

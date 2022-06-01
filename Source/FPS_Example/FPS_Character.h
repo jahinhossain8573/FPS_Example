@@ -25,7 +25,7 @@ class FPS_EXAMPLE_API AFPS_Character : public ACharacter
 
 public:
 	// Sets default values for this character's properties
-	AFPS_Character();
+	AFPS_Character(const FObjectInitializer& objInit);
 
 protected:
 	// Called when the game starts or when spawned
