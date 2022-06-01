@@ -9,6 +9,10 @@ AFPS_Character::AFPS_Character(const FObjectInitializer& objInit)
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	//Makes the jumping more realistic
+	/*GetCharacterMovement()->GravityScale = 2.5f;
+	GetCharacterMovement()->JumpZVelocity = 620;*/
 }
 
 // Called when the game starts or when spawned
@@ -42,6 +46,11 @@ void AFPS_Character::MoveRight(float Value)
 	FVector Direction = FRotationMatrix(Controller->GetControlRotation()).GetScaledAxis(EAxis::Y);
 	AddMovementInput(Direction, Value);
 }
+
+/*void AFPS_Character::Jump()
+{
+	Jump
+}*/
 
 void AFPS_Character::StartSprinting()
 {
