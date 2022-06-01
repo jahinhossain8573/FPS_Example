@@ -6,7 +6,6 @@
 #include "GameFramework/Character.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
-#include "CustomCharacterMovementComponent.h"
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
 #include "Math/UnrealMathUtility.h"
@@ -25,13 +24,13 @@ class FPS_EXAMPLE_API AFPS_Character : public ACharacter
 
 public:
 	// Sets default values for this character's properties
-	AFPS_Character(const FObjectInitializer& objInit);
+	AFPS_Character();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -55,13 +54,13 @@ public:
 
 	//Booleans
 	UPROPERTY(BlueprintReadWrite)
-	    bool IsSprinting = false;
+		bool IsSprinting = false;
 	UPROPERTY(BlueprintReadWrite)
 		bool isAutomatic = false;
 
 	//Components
 	UPROPERTY(BlueprintReadWrite)
-	    UCharacterMovementComponent* MovementComponent = nullptr;
+		UCharacterMovementComponent* MovementComponent = nullptr;
 
 	//Camera
 	UPROPERTY(BlueprintReadWrite)
@@ -94,7 +93,7 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 		UAnimMontage* GunReloadingMontageEmpty;
 
-	
+
 	//Timers
 	FTimerHandle AutoFireHandle;
 	FTimerDelegate AutoFireDelegate;
@@ -102,11 +101,10 @@ public:
 	// UFUNCTIONS
 	//Basic Movement
 	UFUNCTION()
-	    void MoveForward(float Value);
+		void MoveForward(float Value);
 
 	UFUNCTION()
 		void MoveRight(float Value);
-
 
 	/*UFUNCTION()
 		void Jump();*/

@@ -4,10 +4,9 @@
 #include "FPS_Character.h"
 
 // Sets default values
-AFPS_Character::AFPS_Character(const FObjectInitializer& objInit)
-	:Super(objInit.SetDefaultSubobjectClass<UCustomCharacterMovementComponent>(ACharacter::CharacterMovementComponentName))
+AFPS_Character::AFPS_Character()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	//Makes the jumping more realistic
@@ -19,7 +18,7 @@ AFPS_Character::AFPS_Character(const FObjectInitializer& objInit)
 void AFPS_Character::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 // Called every frame
@@ -32,11 +31,9 @@ void AFPS_Character::Tick(float DeltaTime)
 void AFPS_Character::MoveForward(float Value)
 {
 	// Find out which way is "forward" and record that the player wants to move that way.
-	
 	FRotator CharacterRotation = this->GetActorRotation();
 	CharacterRotation.Pitch = 0;
 	FVector Direction = UKismetMathLibrary::GetForwardVector(CharacterRotation);
-
 	AddMovementInput(Direction, Value);
 }
 
@@ -78,7 +75,7 @@ void AFPS_Character::FireBullet()
 	{
 		//Raycast
 		FVector StartB = GunMesh->GetSocketLocation("FireSocket");
-		FVector EndB = UKismetMathLibrary::GetForwardVector(GunMesh->GetSocketRotation("FireSocket"))*100000;
+		FVector EndB = UKismetMathLibrary::GetForwardVector(GunMesh->GetSocketRotation("FireSocket")) * 100000;
 		FCollisionQueryParams QueryParams;
 		FHitResult OutHit;
 		if (GetWorld()->LineTraceSingleByChannel(OutHit, StartB, EndB, ECC_Visibility, QueryParams))
@@ -91,7 +88,7 @@ void AFPS_Character::FireBullet()
 		float Yaw = (FMath::RandRange(-0.1F, 0.1F)) * rYaw;
 		AddControllerPitchInput(Pitch);
 		AddControllerYawInput(Yaw);
-		
+
 		//Animation
 		ArmsAnimInstance->Montage_Play(ArmsFiringMontage);
 		GunAnimInstance->Montage_Play(GunFiringMontage);
@@ -149,7 +146,7 @@ void AFPS_Character::ReloadWeapon()
 		AmmoInMag += AmmoRequired;
 		StoredAmmo -= AmmoRequired;
 
-		UE_LOG (LogTemp, Log, TEXT("Reloaded"));
+		UE_LOG(LogTemp, Log, TEXT("Reloaded"));
 	}
 	else
 	{
@@ -162,7 +159,7 @@ void AFPS_Character::Interaction()
 {
 	/*
 	FVector StartI = PlayerCamera->GetComponentLocation();
-	FVector EndI = 
+	FVector EndI =
 	GetWorld()->LineTraceSingleByChannel();
 	*/
 }

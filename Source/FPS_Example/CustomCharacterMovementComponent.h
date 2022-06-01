@@ -7,7 +7,7 @@
 #include "CustomCharacterMovementComponent.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class FPS_EXAMPLE_API UCustomCharacterMovementComponent : public UCharacterMovementComponent
@@ -16,21 +16,20 @@ class FPS_EXAMPLE_API UCustomCharacterMovementComponent : public UCharacterMovem
 
 public:
 	//Curves
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(EditAnywhere)
 		UCurveFloat* JumpCurve;
-	
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* TickFunction) override;
+	virtual void TickComponent(float DeltaTime, ELevelTick tick_type, FActorComponentTickFunction* tickFunction) override;
 	virtual bool DoJump(bool bReplayingMoves) override;
 
 private:
 	bool isJumping;
 	float jumpTime;
 	float prevJumpCurveValue;
-	
+
 	float jumpMinTime;
 	float jumpMaxTime;
 };
