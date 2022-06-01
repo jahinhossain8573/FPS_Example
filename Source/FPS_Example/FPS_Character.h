@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
+#include "CustomCharacterMovementComponent.h"
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
 #include "Math/UnrealMathUtility.h"
@@ -106,12 +107,10 @@ public:
 	UFUNCTION()
 		void MoveRight(float Value);
 
-<<<<<<< HEAD
-=======
+
 	/*UFUNCTION()
 		void Jump();*/
 
->>>>>>> parent of b385b41 (Started working on a custom curve based jump system)
 	UFUNCTION()
 		void StartSprinting();
 
