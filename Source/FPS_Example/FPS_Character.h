@@ -78,19 +78,19 @@ public:
 
 	//Animation Montages
 	//ArmsMontages
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(EditAnywhere)
 		UAnimMontage* ArmsFiringMontage;
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(EditAnywhere)
 		UAnimMontage* ArmsReloadingMontage;
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(EditAnywhere)
 		UAnimMontage* ArmsReloadingMontageEmpty;
 
 	//GunMontages
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(EditAnywhere)
 		UAnimMontage* GunFiringMontage;
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(EditAnywhere)
 		UAnimMontage* GunReloadingMontage;
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(EditAnywhere)
 		UAnimMontage* GunReloadingMontageEmpty;
 
 
