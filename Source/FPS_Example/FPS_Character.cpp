@@ -9,9 +9,13 @@ AFPS_Character::AFPS_Character()
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	//Makes the jumping more realistic
-	GetCharacterMovement()->GravityScale = 2.5f;
-	GetCharacterMovement()->JumpZVelocity = 620;
+	//Character Movement Tweaks
+	GetCharacterMovement()->GravityScale = 2.8f;
+	GetCharacterMovement()->JumpZVelocity = 588;
+	GetCharacterMovement()->BrakingDecelerationFalling = 7.0f;
+	GetCharacterMovement()->FallingLateralFriction = 7.0f;
+	GetCharacterMovement()->Mass = 140.0f;
+	GetCharacterMovement()->MaxWalkSpeed = 300.0f;
 }
 
 // Called when the game starts or when spawned
@@ -53,7 +57,7 @@ void AFPS_Character::StartSprinting()
 void AFPS_Character::StopSprinting()
 {
 	IsSprinting = false;
-	MovementComponent->MaxWalkSpeed = 250;
+	MovementComponent->MaxWalkSpeed = 300;
 }
 
 void AFPS_Character::EnterADS()
