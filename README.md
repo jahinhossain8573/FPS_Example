@@ -4,13 +4,13 @@ This project is an FPS Example being developed in Unreal Engine 4.27 using C++ f
 I am currently using the FPS Assault Pack which costs 14.99$, but I will be replacing it further down the line.
 
 ### Features:
- - Movement (Walking, Sprinting)
+ - Movement (Walking, Sprinting, Jumping)
  - Shooting (Simple Raycast)
  - Reloading (Along with proper Animations)
  - Ammo Management
 
- ### In progress
- - Jumping
+ ### In Progress:
+ - IK (Inverse Kinematics) based ADS system
 
 ### To do:
  - Physics based shooting system using raycast
