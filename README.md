@@ -10,7 +10,7 @@ I am currently using the FPS Assault Pack which costs 14.99$, but I will be repl
  - Ammo Management
 
  ### In Progress:
- - IK (Inverse Kinematics) based ADS system
+ - Conditionals that dictate whether a certain action can be performed at the given time (Say, you can not fire while you are sprinting)
 
 ### To do:
  - Physics based shooting system using raycast

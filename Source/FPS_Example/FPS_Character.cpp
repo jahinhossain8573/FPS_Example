@@ -100,15 +100,18 @@ void AFPS_Character::FireBullet()
 
 void AFPS_Character::FireWeapon()
 {
-	if (isAutomatic)  //Checks Fire Mode
+	if (!IsSprinting)
 	{
-		//Automatic Fire
-		GetWorldTimerManager().SetTimer(AutoFireHandle, this, &AFPS_Character::FireBullet, 0.12F, true, 0.0F);
-	}
-	else
-	{
-		//Single Fire
-		FireBullet();
+		if (isAutomatic)  //Checks Fire Mode
+		{
+			//Automatic Fire
+			GetWorldTimerManager().SetTimer(AutoFireHandle, this, &AFPS_Character::FireBullet, 0.12F, true, 0.0F);
+		}
+		else
+		{
+			//Single Fire
+			FireBullet();
+		}
 	}
 }
 
@@ -126,32 +129,35 @@ void AFPS_Character::ChangeFireMode()
 
 void AFPS_Character::ReloadWeapon()
 {
-	UE_LOG(LogTemp, Log, TEXT("%d"), AmmoInMag);
-	if (AmmoInMag < MagazineAmmoCapacity)
+	if (!IsSprinting)
 	{
-		int AmmoRequired = MagazineAmmoCapacity - AmmoInMag;
-
-		if (AmmoInMag == 0)
+		UE_LOG(LogTemp, Log, TEXT("%d"), AmmoInMag);
+		if (AmmoInMag < MagazineAmmoCapacity)
 		{
-			ArmsAnimInstance->Montage_Play(ArmsReloadingMontageEmpty);
-			GunAnimInstance->Montage_Play(GunReloadingMontageEmpty);
+			int AmmoRequired = MagazineAmmoCapacity - AmmoInMag;
+
+			if (AmmoInMag == 0)
+			{
+				ArmsAnimInstance->Montage_Play(ArmsReloadingMontageEmpty);
+				GunAnimInstance->Montage_Play(GunReloadingMontageEmpty);
+			}
+			else
+			{
+				ArmsAnimInstance->Montage_Play(ArmsReloadingMontage);
+				GunAnimInstance->Montage_Play(GunReloadingMontage);
+			}
+
+			AmmoInMag += AmmoRequired;
+			StoredAmmo -= AmmoRequired;
+
+			UE_LOG(LogTemp, Log, TEXT("Reloaded"));
 		}
 		else
 		{
-			ArmsAnimInstance->Montage_Play(ArmsReloadingMontage);
-			GunAnimInstance->Montage_Play(GunReloadingMontage);
+			UE_LOG(LogTemp, Log, TEXT("Mag Full"));
 		}
-
-		AmmoInMag += AmmoRequired;
-		StoredAmmo -= AmmoRequired;
-
-		UE_LOG(LogTemp, Log, TEXT("Reloaded"));
+		UE_LOG(LogTemp, Log, TEXT("%d"), AmmoInMag);
 	}
-	else
-	{
-		UE_LOG(LogTemp, Log, TEXT("Mag Full"));
-	}
-	UE_LOG(LogTemp, Log, TEXT("%d"), AmmoInMag);
 }
 
 void AFPS_Character::Interaction()
