@@ -56,6 +56,10 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 		bool IsSprinting = false;
 	UPROPERTY(BlueprintReadWrite)
+		bool IsFiring = false;
+	UPROPERTY(BlueprintReadWrite)
+		bool IsReloading = false;
+	UPROPERTY(BlueprintReadWrite)
 		bool isAutomatic = false;
 
 	//Components
@@ -95,8 +99,11 @@ public:
 
 
 	//Timers
+	//Firing
 	FTimerHandle AutoFireHandle;
-	FTimerDelegate AutoFireDelegate;
+
+	//Reloading
+	FTimerHandle ReloadTimerHandle;
 
 	// UFUNCTIONS
 	//Basic Movement
@@ -134,6 +141,9 @@ public:
 
 	UFUNCTION()
 		void ReloadWeapon();
+
+	UFUNCTION()
+		void ReloadBoolSwitch();
 
 	UFUNCTION()
 		void Interaction();

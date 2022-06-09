@@ -50,8 +50,11 @@ void AFPS_Character::MoveRight(float Value)
 
 void AFPS_Character::StartSprinting()
 {
-	IsSprinting = true;
-	MovementComponent->MaxWalkSpeed = 500;
+	if (!IsFiring && !IsReloading)
+	{
+		IsSprinting = true;
+		MovementComponent->MaxWalkSpeed = 500;
+	}
 }
 
 void AFPS_Character::StopSprinting()
@@ -102,6 +105,7 @@ void AFPS_Character::FireWeapon()
 {
 	if (!IsSprinting)
 	{
+		IsFiring = true;
 		if (isAutomatic)  //Checks Fire Mode
 		{
 			//Automatic Fire
@@ -119,6 +123,7 @@ void AFPS_Character::StopAutoFire()
 {
 	//Halts Auto Firing
 	GetWorldTimerManager().ClearTimer(AutoFireHandle);
+	IsFiring = false;
 }
 
 void AFPS_Character::ChangeFireMode()
@@ -140,11 +145,13 @@ void AFPS_Character::ReloadWeapon()
 			{
 				ArmsAnimInstance->Montage_Play(ArmsReloadingMontageEmpty);
 				GunAnimInstance->Montage_Play(GunReloadingMontageEmpty);
+				GetWorldTimerManager().SetTimer(ReloadTimerHandle, this, &AFPS_Character::ReloadBoolSwitch, 3.17, true, 0.0F);
 			}
 			else
 			{
 				ArmsAnimInstance->Montage_Play(ArmsReloadingMontage);
 				GunAnimInstance->Montage_Play(GunReloadingMontage);
+				GetWorldTimerManager().SetTimer(ReloadTimerHandle, this, &AFPS_Character::ReloadBoolSwitch, 2.67, true, 0.0F);
 			}
 
 			AmmoInMag += AmmoRequired;
@@ -158,6 +165,11 @@ void AFPS_Character::ReloadWeapon()
 		}
 		UE_LOG(LogTemp, Log, TEXT("%d"), AmmoInMag);
 	}
+}
+
+void AFPS_Character::ReloadBoolSwitch()
+{
+	IsReloading = !IsReloading;
 }
 
 void AFPS_Character::Interaction()
