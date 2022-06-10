@@ -103,7 +103,7 @@ void AFPS_Character::FireBullet()
 
 void AFPS_Character::FireWeapon()
 {
-	if (!IsSprinting)
+	if (!IsSprinting && !IsReloading)
 	{
 		IsFiring = true;
 		if (isAutomatic)  //Checks Fire Mode
