@@ -48,6 +48,14 @@ void AFPS_Character::MoveRight(float Value)
 	AddMovementInput(Direction, Value);
 }
 
+void AFPS_Character::CustomJump()
+{
+	if (!IsSprinting && !IsReloading)
+	{
+		Jump();
+	}
+}
+
 void AFPS_Character::StartSprinting()
 {
 	if (!IsFiring && !IsReloading)
@@ -192,7 +200,7 @@ void AFPS_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("LookUp", this, &AFPS_Character::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("LookRight", this, &AFPS_Character::AddControllerYawInput);
 
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AFPS_Character::Jump);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AFPS_Character::CustomJump);
 	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &AFPS_Character::StartSprinting);
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &AFPS_Character::StopSprinting);
 

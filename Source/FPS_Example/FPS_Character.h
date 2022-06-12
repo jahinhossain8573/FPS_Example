@@ -114,6 +114,9 @@ public:
 		void MoveRight(float Value);
 
 	UFUNCTION()
+		void CustomJump();
+
+	UFUNCTION()
 		void StartSprinting();
 
 	UFUNCTION()
