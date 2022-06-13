@@ -7,10 +7,11 @@ I am currently using the FPS Assault Pack which costs 14.99$, but I will be repl
  - Movement (Walking, Sprinting, Jumping)
  - Shooting (Simple Raycast)
  - Reloading (Along with proper Animations)
+ - Multiple Fire Modes
  - Ammo Management
 
  ### In Progress:
- - Conditionals that dictate whether a certain action can be performed at the given time (Say, you can not fire while you are sprinting)
+ - ADS System
 
 ### To do:
  - Physics based shooting system using raycast
