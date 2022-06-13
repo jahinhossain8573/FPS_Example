@@ -73,10 +73,12 @@ void AFPS_Character::StopSprinting()
 
 void AFPS_Character::EnterADS()
 {
+	BP_EnterADS.Broadcast();
 }
 
 void AFPS_Character::ExitADS()
 {
+	BP_ExitADS.Broadcast();
 }
 
 void AFPS_Character::FireBullet()
@@ -206,7 +208,12 @@ void AFPS_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	PlayerInputComponent->BindAction("FireWeapon", IE_Pressed, this, &AFPS_Character::FireWeapon);
 	PlayerInputComponent->BindAction("FireWeapon", IE_Released, this, &AFPS_Character::StopAutoFire);
+
+	PlayerInputComponent->BindAction("ADS", IE_Pressed, this, &AFPS_Character::EnterADS);
+	PlayerInputComponent->BindAction("ADS", IE_Released, this, &AFPS_Character::ExitADS);
+
 	PlayerInputComponent->BindAction("ChangeFireMode", IE_Pressed, this, &AFPS_Character::ChangeFireMode);
 	PlayerInputComponent->BindAction("ReloadWeapon", IE_Pressed, this, &AFPS_Character::ReloadWeapon);
+
 	PlayerInputComponent->BindAction("Interaction", IE_Pressed, this, &AFPS_Character::Interaction);
 }
