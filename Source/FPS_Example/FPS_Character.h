@@ -54,6 +54,8 @@ public:
 
 	//Booleans
 	UPROPERTY(BlueprintReadWrite)
+		bool IsInADS = false;
+	UPROPERTY(BlueprintReadWrite)
 		bool IsSprinting = false;
 	UPROPERTY(BlueprintReadWrite)
 		bool IsFiring = false;

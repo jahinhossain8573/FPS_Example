@@ -73,11 +73,13 @@ void AFPS_Character::StopSprinting()
 
 void AFPS_Character::EnterADS()
 {
+	IsInADS = true;
 	BP_EnterADS.Broadcast();
 }
 
 void AFPS_Character::ExitADS()
 {
+	IsInADS = false;
 	BP_ExitADS.Broadcast();
 }
 
