@@ -50,7 +50,7 @@ void AFPS_Character::MoveRight(float Value)
 
 void AFPS_Character::CustomJump()
 {
-	if (!IsSprinting && !IsReloading)
+	if (!IsSprinting && !IsReloading && !IsInADS)
 	{
 		Jump();
 	}
@@ -73,14 +73,20 @@ void AFPS_Character::StopSprinting()
 
 void AFPS_Character::EnterADS()
 {
-	IsInADS = true;
-	BP_EnterADS.Broadcast();
+	if (!IsReloading && !IsSprinting)
+	{
+		IsInADS = true;
+		BP_EnterADS.Broadcast();
+	}
 }
 
 void AFPS_Character::ExitADS()
 {
-	IsInADS = false;
-	BP_ExitADS.Broadcast();
+	if (!IsReloading && !IsSprinting)
+	{
+		IsInADS = false;
+		BP_ExitADS.Broadcast();
+	}
 }
 
 void AFPS_Character::FireBullet()
@@ -146,7 +152,7 @@ void AFPS_Character::ChangeFireMode()
 
 void AFPS_Character::ReloadWeapon()
 {
-	if (!IsSprinting)
+	if (!IsSprinting && !IsInADS)
 	{
 		UE_LOG(LogTemp, Log, TEXT("%d"), AmmoInMag);
 		if (AmmoInMag < MagazineAmmoCapacity)
