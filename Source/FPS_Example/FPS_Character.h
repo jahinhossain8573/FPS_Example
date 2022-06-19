@@ -39,6 +39,10 @@ public:
 
 	//Variables
 	//Integers
+	// FVectors
+	UPROPERTY(BlueprintReadWrite)
+		FVector AimOffset;
+
 	//Ammo
 	UPROPERTY(BlueprintReadWrite)
 		int AmmoInMag = 30;

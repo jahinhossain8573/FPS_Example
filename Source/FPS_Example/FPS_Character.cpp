@@ -30,6 +30,7 @@ void AFPS_Character::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	AimOffset = GunMesh->GetSocketLocation("AimSocket") - GunMesh->GetSocketLocation("CameraSocket");
 }
 
 void AFPS_Character::MoveForward(float Value)
