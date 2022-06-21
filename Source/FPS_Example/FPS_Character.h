@@ -85,6 +85,8 @@ public:
 	//Skeletal Meshes
 	UPROPERTY(BlueprintReadWrite)
 		USkeletalMeshComponent* GunMesh = nullptr;
+	UPROPERTY(BlueprintReadWrite)
+		USkeletalMeshComponent* ArmsMesh = nullptr;
 
 	//Animation Montages
 	//ArmsMontages
