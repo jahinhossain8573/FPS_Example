@@ -88,6 +88,12 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 		USkeletalMeshComponent* ArmsMesh = nullptr;
 
+	//Static Meshes
+	UPROPERTY(BlueprintReadWrite)
+		UStaticMeshComponent* AimSocket = nullptr;
+	UPROPERTY(BlueprintReadWrite)
+		UStaticMeshComponent* CameraSocket = nullptr;
+
 	//Animation Montages
 	//ArmsMontages
 	UPROPERTY(EditAnywhere)
