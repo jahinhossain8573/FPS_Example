@@ -93,6 +93,8 @@ public:
 		UStaticMeshComponent* AimSocket = nullptr;
 	UPROPERTY(BlueprintReadWrite)
 		UStaticMeshComponent* CameraSocket = nullptr;
+	UPROPERTY(BlueprintReadWrite)
+		UStaticMeshComponent* RightHandSocket = nullptr;
 
 	//Animation Montages
 	//ArmsMontages

@@ -30,7 +30,7 @@ void AFPS_Character::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	AimOffset = CameraSocket->GetRelativeLocation() - AimSocket->GetRelativeLocation();
+	AimOffset = RightHandSocket->GetRelativeLocation() - CameraSocket->GetRelativeLocation() - AimSocket->GetRelativeLocation();
 	DrawDebugLine(GetWorld(), CameraSocket->GetRelativeLocation(), CameraSocket->GetRelativeLocation() + AimOffset, FColor::Red, false, 0.8f);
 }
 
