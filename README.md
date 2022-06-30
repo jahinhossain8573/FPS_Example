@@ -17,5 +17,3 @@ I am currently using the FPS Assault Pack which costs 14.99$, but I will be repl
  - Physics based shooting system using raycast
  - IK based animation system
  - Vaulting
-
- ### Exams till the 30th. I apologize for the slow progress. Keep me in your prayers.
