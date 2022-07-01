@@ -39,9 +39,9 @@ public:
 
 	//Variables
 	//Integers
-	// FVectors
+	// FTransforms
 	UPROPERTY(BlueprintReadWrite)
-		FVector AimOffset;
+		FTransform AimOffset;
 
 	//Ammo
 	UPROPERTY(BlueprintReadWrite)

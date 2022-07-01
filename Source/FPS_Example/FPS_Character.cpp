@@ -30,8 +30,8 @@ void AFPS_Character::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	AimOffset = RightHandSocket->GetRelativeLocation() + (CameraSocket->GetRelativeLocation() - AimSocket->GetRelativeLocation());
-	DrawDebugLine(GetWorld(), RightHandSocket->GetComponentLocation(), RightHandSocket->GetComponentLocation() + AimOffset, FColor::Red, false, 0.8f);
+	AimOffset = UKismetMathLibrary::MakeRelativeTransform(AimSocket->GetComponentTransform(), RightHandSocket->GetComponentTransform());
+	//DrawDebugLine(GetWorld(), RightHandSocket->GetComponentLocation(), RightHandSocket->GetComponentLocation() + AimOffset, FColor::Red, false, 0.8f);
 }
 
 void AFPS_Character::MoveForward(float Value)
@@ -102,7 +102,7 @@ void AFPS_Character::FireBullet()
 		FHitResult OutHit;
 		if (GetWorld()->LineTraceSingleByChannel(OutHit, StartB, EndB, ECC_Visibility, QueryParams))
 		{
-			DrawDebugLine(GetWorld(), StartB, OutHit.ImpactPoint, FColor::Red, true);
+			//DrawDebugLine(GetWorld(), StartB, OutHit.ImpactPoint, FColor::Red, true);
 		}
 
 		//Recoil
