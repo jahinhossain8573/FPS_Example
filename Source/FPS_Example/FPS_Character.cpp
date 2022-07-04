@@ -23,17 +23,16 @@ void AFPS_Character::BeginPlay()
 {
 	Super::BeginPlay();
 
+	AimOffset = UKismetMathLibrary::MakeRelativeTransform(CameraSocket->GetComponentTransform(), RightHandSocket->GetComponentTransform());
+	FVector R_Hand_Location = RightHandSocket->GetRelativeLocation() - FVector(AimOffset.GetLocation().X, AimOffset.GetLocation().Y * -1, AimOffset.GetLocation().Z);
+	DrawDebugLine(GetWorld(), CameraSocket->GetComponentTransform().GetLocation(), CameraSocket->GetComponentLocation() + AimOffset.GetLocation(), FColor::Red, false, 0.8f);
+	UE_LOG(LogTemp, Display, TEXT("%s"), *R_Hand_Location.ToString());
 }
 
 // Called every frame
 void AFPS_Character::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	AimOffset = UKismetMathLibrary::MakeRelativeTransform(CameraSocket->GetComponentTransform(), RightHandSocket->GetComponentTransform());
-	FVector R_Hand_Location = CameraSocket->GetComponentLocation() + AimOffset.GetLocation();
-	DrawDebugLine(GetWorld(), CameraSocket->GetComponentTransform().GetLocation(), CameraSocket->GetComponentLocation() + AimOffset.GetLocation(), FColor::Red, false, 0.8f);
-	UE_LOG(LogTemp, Display, TEXT("%s"), *R_Hand_Location.ToString());
 }
 
 void AFPS_Character::MoveForward(float Value)
