@@ -42,6 +42,8 @@ public:
 	// FTransforms
 	UPROPERTY(BlueprintReadWrite)
 		FTransform AimOffset;
+	UPROPERTY(BlueprintReadWrite)
+		FVector R_Hand_Location;
 
 	//Ammo
 	UPROPERTY(BlueprintReadWrite)

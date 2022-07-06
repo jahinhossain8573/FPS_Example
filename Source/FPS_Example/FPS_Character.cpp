@@ -24,8 +24,8 @@ void AFPS_Character::BeginPlay()
 	Super::BeginPlay();
 
 	AimOffset = UKismetMathLibrary::MakeRelativeTransform(CameraSocket->GetComponentTransform(), RightHandSocket->GetComponentTransform());
-	FVector R_Hand_Location = RightHandSocket->GetRelativeLocation() - FVector(AimOffset.GetLocation().X, AimOffset.GetLocation().Y * -1, AimOffset.GetLocation().Z);
-	DrawDebugLine(GetWorld(), CameraSocket->GetComponentTransform().GetLocation(), CameraSocket->GetComponentLocation() + AimOffset.GetLocation(), FColor::Red, false, 0.8f);
+	R_Hand_Location = RightHandSocket->GetRelativeLocation() + FVector(AimOffset.GetLocation().X, AimOffset.GetLocation().Y * -1, AimOffset.GetLocation().Z);
+	
 	UE_LOG(LogTemp, Display, TEXT("%s"), *R_Hand_Location.ToString());
 }
 
@@ -33,6 +33,7 @@ void AFPS_Character::BeginPlay()
 void AFPS_Character::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	DrawDebugLine(GetWorld(), CameraSocket->GetComponentTransform().GetLocation(), CameraSocket->GetComponentLocation() + AimOffset.GetLocation(), FColor::Red, false, 0.8f);
 }
 
 void AFPS_Character::MoveForward(float Value)
