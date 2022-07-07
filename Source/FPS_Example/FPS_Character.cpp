@@ -23,8 +23,10 @@ void AFPS_Character::BeginPlay()
 {
 	Super::BeginPlay();
 
-	AimOffset = UKismetMathLibrary::MakeRelativeTransform(CameraSocket->GetComponentTransform(), RightHandSocket->GetComponentTransform());
-	R_Hand_Location = RightHandSocket->GetRelativeLocation() + FVector(AimOffset.GetLocation().X, AimOffset.GetLocation().Y * -1, AimOffset.GetLocation().Z);
+	AimOffset = UKismetMathLibrary::MakeRelativeTransform(GunMesh->GetSocketTransform("AimSocket"), ArmsMesh->GetSocketTransform("hand_r"));
+	R_Hand_Location = RightHandSocket->GetRelativeLocation() - FVector(AimOffset.GetLocation().X, AimOffset.GetLocation().Y * -1, AimOffset.GetLocation().Z);
+	RightHandSocket->SetRelativeLocation(R_Hand_Location);
+	RightHandSocket->SetRelativeRotation(AimOffset.GetRotation());
 	
 	UE_LOG(LogTemp, Display, TEXT("%s"), *R_Hand_Location.ToString());
 }
