@@ -143,6 +143,9 @@ public:
 
 	//Gameplay Mechanics
 	UFUNCTION()
+		FVector CalculateOffset();
+
+	UFUNCTION()
 		void EnterADS();
 
 	UFUNCTION()

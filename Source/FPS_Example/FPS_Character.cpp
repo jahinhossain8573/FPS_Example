@@ -22,13 +22,14 @@ AFPS_Character::AFPS_Character()
 void AFPS_Character::BeginPlay()
 {
 	Super::BeginPlay();
+	CalculateOffset();
 }
 
 // Called every frame
 void AFPS_Character::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	DrawDebugLine(GetWorld(), CameraSocket->GetComponentTransform().GetLocation(), CameraSocket->GetComponentLocation() + AimOffset.GetLocation(), FColor::Red, false, 0.8f);
+	
 }
 
 void AFPS_Character::MoveForward(float Value)
@@ -70,17 +71,32 @@ void AFPS_Character::StopSprinting()
 	MovementComponent->MaxWalkSpeed = 300;
 }
 
+FVector AFPS_Character::CalculateOffset()
+{
+	float OffsetX = CameraSocket->GetComponentLocation().X - AimSocket->GetComponentLocation().X;
+	float OffsetZ = CameraSocket->GetComponentLocation().Z - AimSocket->GetComponentLocation().Z;
+
+	R_Hand_Location = FVector(OffsetX, RightHandSocket->GetRelativeLocation().Y, OffsetZ);
+
+	DrawDebugLine(GetWorld(), RightHandSocket->GetComponentTransform().GetLocation(), RightHandSocket->GetComponentLocation() + AimOffset.GetLocation(), FColor::Red, false, 0.28f);
+
+	return R_Hand_Location;
+}
+
 void AFPS_Character::EnterADS()
 {
 	if (!IsReloading && !IsSprinting)
 	{
-		IsInADS = true;
+		/*IsInADS = true;
 		AimOffset = UKismetMathLibrary::MakeRelativeTransform(GunMesh->GetSocketTransform("AimSocket"), ArmsMesh->GetSocketTransform("hand_r"));
 		R_Hand_Location = RightHandSocket->GetRelativeLocation() - FVector(AimOffset.GetLocation().X, AimOffset.GetLocation().Y * -1, AimOffset.GetLocation().Z);
 		RightHandSocket->SetRelativeLocation(R_Hand_Location);
 		RightHandSocket->SetRelativeRotation(AimOffset.GetRotation());
 
-		UE_LOG(LogTemp, Display, TEXT("%s"), *R_Hand_Location.ToString());
+		UE_LOG(LogTemp, Display, TEXT("%s"), *R_Hand_Location.ToString());*/
+
+		IsInADS = true;
+
 		BP_EnterADS.Broadcast();
 	}
 }
@@ -90,6 +106,7 @@ void AFPS_Character::ExitADS()
 	if (!IsReloading && !IsSprinting)
 	{
 		IsInADS = false;
+
 		BP_ExitADS.Broadcast();
 	}
 }
