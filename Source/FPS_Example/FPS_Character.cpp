@@ -73,10 +73,23 @@ void AFPS_Character::StopSprinting()
 
 FVector AFPS_Character::CalculateOffset()
 {
+	//Calculation 1
+	//{
 	float OffsetX = CameraSocket->GetComponentLocation().X - AimSocket->GetComponentLocation().X;
 	float OffsetZ = CameraSocket->GetComponentLocation().Z - AimSocket->GetComponentLocation().Z;
-
+	
 	R_Hand_Location = FVector(OffsetX, RightHandSocket->GetRelativeLocation().Y, OffsetZ);
+	//}
+
+	//Calculation 2
+	AimOffset.SetLocation(R_Hand_Location);
+	FQuat rot;
+	rot.X = RightHandSocket->GetRelativeRotation().Pitch;
+	rot.Y = RightHandSocket->GetRelativeRotation().Roll;
+	rot.Z = RightHandSocket->GetRelativeRotation().Yaw;
+	AimOffset.SetRotation(rot);
+	AimOffset.SetScale3D(FVector(1.0F, 1.0F, 1.0F));
+	//Calculation 2
 
 	DrawDebugLine(GetWorld(), RightHandSocket->GetComponentTransform().GetLocation(), RightHandSocket->GetComponentLocation() + AimOffset.GetLocation(), FColor::Red, false, 0.28f);
 
@@ -87,13 +100,6 @@ void AFPS_Character::EnterADS()
 {
 	if (!IsReloading && !IsSprinting)
 	{
-		/*IsInADS = true;
-		AimOffset = UKismetMathLibrary::MakeRelativeTransform(GunMesh->GetSocketTransform("AimSocket"), ArmsMesh->GetSocketTransform("hand_r"));
-		R_Hand_Location = RightHandSocket->GetRelativeLocation() - FVector(AimOffset.GetLocation().X, AimOffset.GetLocation().Y * -1, AimOffset.GetLocation().Z);
-		RightHandSocket->SetRelativeLocation(R_Hand_Location);
-		RightHandSocket->SetRelativeRotation(AimOffset.GetRotation());
-
-		UE_LOG(LogTemp, Display, TEXT("%s"), *R_Hand_Location.ToString());*/
 
 		IsInADS = true;
 
