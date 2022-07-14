@@ -82,12 +82,18 @@ FVector AFPS_Character::CalculateOffset()
 	//}
 
 	//Calculation 2
+	//Location
+	UKismetMathLibrary::MakeRelativeTransform(GunMesh->GetSocketTransform("AimSocket"), ArmsMesh->GetSocketTransform("hand_r"));
 	AimOffset.SetLocation(R_Hand_Location);
+
+	//Rotation
 	FQuat rot;
 	rot.X = RightHandSocket->GetRelativeRotation().Pitch;
 	rot.Y = RightHandSocket->GetRelativeRotation().Roll;
 	rot.Z = RightHandSocket->GetRelativeRotation().Yaw;
 	AimOffset.SetRotation(rot);
+
+	//Scale
 	AimOffset.SetScale3D(FVector(1.0F, 1.0F, 1.0F));
 	//Calculation 2
 
