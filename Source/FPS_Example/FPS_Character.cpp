@@ -82,24 +82,23 @@ FVector AFPS_Character::CalculateOffset()
 	//}
 
 	//Calculation 2
+	//{
+	FTransform T_Relative = UKismetMathLibrary::MakeRelativeTransform(GunMesh->GetSocketTransform("AimSocket"), ArmsMesh->GetSocketTransform("hand_r"));
 	//Location
-	UKismetMathLibrary::MakeRelativeTransform(GunMesh->GetSocketTransform("AimSocket"), ArmsMesh->GetSocketTransform("hand_r"));
-	AimOffset.SetLocation(R_Hand_Location);
+	AimOffset.SetLocation(RightHandComponent->GetRelativeLocation() - FVector(T_Relative.GetLocation().X, T_Relative.GetLocation().Y * -1, T_Relative.GetLocation().Z));
 
 	//Rotation
-	FQuat rot;
-	rot.X = RightHandSocket->GetRelativeRotation().Pitch;
-	rot.Y = RightHandSocket->GetRelativeRotation().Roll;
-	rot.Z = RightHandSocket->GetRelativeRotation().Yaw;
-	AimOffset.SetRotation(rot);
+	AimOffset.SetRotation(T_Relative.GetRotation());
 
 	//Scale
 	AimOffset.SetScale3D(FVector(1.0F, 1.0F, 1.0F));
-	//Calculation 2
+	//}
+
+	RightHandComponent->SetRelativeTransform(AimOffset);
 
 	DrawDebugLine(GetWorld(), RightHandSocket->GetComponentTransform().GetLocation(), RightHandSocket->GetComponentLocation() + AimOffset.GetLocation(), FColor::Red, false, 0.28f);
 
-	return R_Hand_Location;
+	return AimOffset.GetLocation();
 }
 
 void AFPS_Character::EnterADS()

@@ -11,6 +11,7 @@
 #include "Camera/CameraComponent.h"
 #include "Math/UnrealMathUtility.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Components/SceneComponent.h"
 
 
 #include "FPS_Character.generated.h"
@@ -99,6 +100,10 @@ public:
 		UStaticMeshComponent* CameraSocket = nullptr;
 	UPROPERTY(BlueprintReadWrite)
 		UStaticMeshComponent* RightHandSocket = nullptr;
+
+	//SceneComponents
+	UPROPERTY(BlueprintReadWrite)
+		USceneComponent* RightHandComponent = nullptr;
 
 	//Animation Montages
 	//ArmsMontages
