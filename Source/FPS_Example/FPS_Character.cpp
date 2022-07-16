@@ -22,7 +22,8 @@ AFPS_Character::AFPS_Character()
 void AFPS_Character::BeginPlay()
 {
 	Super::BeginPlay();
-	CalculateOffset();
+
+	R_Hand_Default_T = RightHandComponent->GetRelativeTransform();
 }
 
 // Called every frame
@@ -105,10 +106,11 @@ void AFPS_Character::EnterADS()
 {
 	if (!IsReloading && !IsSprinting)
 	{
-
 		IsInADS = true;
 
 		BP_EnterADS.Broadcast();
+
+		CalculateOffset();
 	}
 }
 
