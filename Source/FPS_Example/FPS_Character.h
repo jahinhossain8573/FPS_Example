@@ -39,10 +39,15 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	//Variables
-	//Integers
+	//Floats
+	UPROPERTY(BlueprintReadWrite)
+		float RightHandAimAlpha = 0.0F;
+
 	// FTransforms
 	UPROPERTY(BlueprintReadWrite)
 		FTransform AimOffset;
+	UPROPERTY(BlueprintReadWrite)
+		FTransform R_Hand_Default_T;
 
 	//FVectors
 	UPROPERTY(BlueprintReadWrite)
