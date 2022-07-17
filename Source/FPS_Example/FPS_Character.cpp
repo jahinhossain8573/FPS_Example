@@ -90,12 +90,10 @@ FVector AFPS_Character::CalculateOffset()
 
 	//Rotation
 	AimOffset.SetRotation(T_Relative.GetRotation());
-
-	//Scale
-	AimOffset.SetScale3D(FVector(1.0F, 1.0F, 1.0F));
 	//}
 
-	RightHandComponent->SetRelativeTransform(AimOffset);
+	RightHandComponent->SetRelativeLocation(AimOffset.GetLocation());
+	RightHandComponent->SetRelativeRotation(AimOffset.GetRotation());
 
 	DrawDebugLine(GetWorld(), RightHandSocket->GetComponentTransform().GetLocation(), RightHandSocket->GetComponentLocation() + AimOffset.GetLocation(), FColor::Red, false, 0.28f);
 
@@ -108,9 +106,9 @@ void AFPS_Character::EnterADS()
 	{
 		IsInADS = true;
 
-		BP_EnterADS.Broadcast();
-
 		CalculateOffset();
+
+		BP_EnterADS.Broadcast();
 	}
 }
 
