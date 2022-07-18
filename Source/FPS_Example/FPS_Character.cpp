@@ -23,7 +23,7 @@ void AFPS_Character::BeginPlay()
 {
 	Super::BeginPlay();
 
-	R_Hand_Default_T = RightHandComponent->GetRelativeTransform();
+	
 }
 
 // Called every frame
@@ -95,7 +95,7 @@ FVector AFPS_Character::CalculateOffset()
 	RightHandComponent->SetRelativeLocation(AimOffset.GetLocation());
 	RightHandComponent->SetRelativeRotation(AimOffset.GetRotation());
 
-	DrawDebugLine(GetWorld(), RightHandSocket->GetComponentTransform().GetLocation(), RightHandSocket->GetComponentLocation() + AimOffset.GetLocation(), FColor::Red, false, 0.28f);
+	//DrawDebugLine(GetWorld(), RightHandSocket->GetComponentTransform().GetLocation(), RightHandSocket->GetComponentLocation() + AimOffset.GetLocation(), FColor::Red, false, 0.28f);
 
 	return AimOffset.GetLocation();
 }
