@@ -89,7 +89,9 @@ FVector AFPS_Character::CalculateOffset()
 	AimOffset.SetLocation(RightHandComponent->GetRelativeLocation() - FVector(T_Relative.GetLocation().X, T_Relative.GetLocation().Y * -1, T_Relative.GetLocation().Z));
 
 	//Rotation
-	AimOffset.SetRotation(T_Relative.GetRotation());
+	FQuat Rot = T_Relative.GetRotation();
+	Rot.Z += 90;
+	AimOffset.SetRotation(Rot);
 	//}
 
 	RightHandComponent->SetRelativeLocation(AimOffset.GetLocation());
