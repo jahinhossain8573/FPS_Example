@@ -74,29 +74,30 @@ void AFPS_Character::StopSprinting()
 
 FVector AFPS_Character::CalculateOffset()
 {
-	//Calculation 1
+	//Right Hand
 	//{
-	float OffsetX = CameraSocket->GetComponentLocation().X - AimSocket->GetComponentLocation().X;
-	float OffsetZ = CameraSocket->GetComponentLocation().Z - AimSocket->GetComponentLocation().Z;
-	
-	R_Hand_Location = FVector(OffsetX, RightHandSocket->GetRelativeLocation().Y, OffsetZ);
-	//}
-
-	//Calculation 2
-	//{
-	FTransform T_Relative = UKismetMathLibrary::MakeRelativeTransform(GunMesh->GetSocketTransform("AimSocket"), ArmsMesh->GetSocketTransform("hand_r"));
+	FTransform T_Relative_R = UKismetMathLibrary::MakeRelativeTransform(GunMesh->GetSocketTransform("AimSocket"), ArmsMesh->GetSocketTransform("hand_r"));
 	//Location
-	AimOffset.SetLocation(RightHandComponent->GetRelativeLocation() - FVector(T_Relative.GetLocation().X, T_Relative.GetLocation().Y * -1, T_Relative.GetLocation().Z));
+	AimOffset.SetLocation(RightHandComponent->GetRelativeLocation() - FVector(T_Relative_R.GetLocation().X, T_Relative_R.GetLocation().Y * -1, T_Relative_R.GetLocation().Z));
 
 	//Rotation
-	FQuat Rot = T_Relative.GetRotation();
+	FQuat Rot = T_Relative_R.GetRotation();
 	Rot.Z += 90;
 	AimOffset.SetRotation(Rot);
 	//}
 
+	//Gun
+	//{
+	/*
+	FTransform T_Relative_G = UKismetMathLibrary::MakeRelativeTransform(ArmsMesh->GetSocketTransform("hand_r"), ArmsMesh->GetSocketTransform("R_GunSocket"));
+
+	AimOffsetG.SetLocation(GunComponent->GetRelativeLocation() + FVector(T_Relative_G.GetLocation().X, T_Relative_G.GetLocation().Y * -1, T_Relative_G.GetLocation().Z));
+
+
+	GunComponent->SetRelativeLocation(FVector(ArmsMesh->GetSocketTransform("R_GunSocket", RTS_Component).GetLocation().X, AimOffsetG.GetLocation().Y, AimOffsetG.GetLocation().Z));
+	*/
 	RightHandComponent->SetRelativeLocation(AimOffset.GetLocation());
 	RightHandComponent->SetRelativeRotation(AimOffset.GetRotation());
-
 	//DrawDebugLine(GetWorld(), RightHandSocket->GetComponentTransform().GetLocation(), RightHandSocket->GetComponentLocation() + AimOffset.GetLocation(), FColor::Red, false, 0.28f);
 
 	return AimOffset.GetLocation();

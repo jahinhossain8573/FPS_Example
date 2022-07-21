@@ -47,7 +47,11 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 		FTransform AimOffset;
 	UPROPERTY(BlueprintReadWrite)
+		FTransform AimOffsetG;
+	UPROPERTY(BlueprintReadWrite)
 		FTransform R_Hand_Default_T;
+	UPROPERTY(BlueprintReadWrite)
+		FTransform L_Hand_Default_T;
 
 	//FVectors
 	UPROPERTY(BlueprintReadWrite)
@@ -107,6 +111,10 @@ public:
 		UStaticMeshComponent* RightHandSocket = nullptr;
 
 	//SceneComponents
+	UPROPERTY(BlueprintReadWrite)
+		USceneComponent* GunComponent = nullptr;
+	UPROPERTY(BlueprintReadWrite)
+		USceneComponent* LeftHandComponent = nullptr;
 	UPROPERTY(BlueprintReadWrite)
 		USceneComponent* RightHandComponent = nullptr;
 
