@@ -88,14 +88,20 @@ FVector AFPS_Character::CalculateOffset()
 
 	//Gun
 	//{
-	/*
+	
 	FTransform T_Relative_G = UKismetMathLibrary::MakeRelativeTransform(ArmsMesh->GetSocketTransform("hand_r"), ArmsMesh->GetSocketTransform("R_GunSocket"));
 
-	AimOffsetG.SetLocation(GunComponent->GetRelativeLocation() + FVector(T_Relative_G.GetLocation().X, T_Relative_G.GetLocation().Y * -1, T_Relative_G.GetLocation().Z));
+	AimOffsetG.SetLocation(T_Relative_G.GetLocation());
+	
+	GunMesh->AttachToComponent(ArmsMesh, FAttachmentTransformRules::KeepRelativeTransform, "hand_r");
+	GunMesh->SetRelativeLocation(GunMesh->GetRelativeLocation() - AimOffsetG.GetLocation());
+	FQuat GunRot;
+	GunRot.X = GunMesh->GetRelativeRotation().Roll + 0;
+	GunRot.Y = GunMesh->GetRelativeRotation().Pitch + 0;
+	GunRot.Z = GunMesh->GetRelativeRotation().Yaw - 45;
+	GunMesh->SetRelativeRotation(GunRot);
+	//}
 
-
-	GunComponent->SetRelativeLocation(FVector(ArmsMesh->GetSocketTransform("R_GunSocket", RTS_Component).GetLocation().X, AimOffsetG.GetLocation().Y, AimOffsetG.GetLocation().Z));
-	*/
 	RightHandComponent->SetRelativeLocation(AimOffset.GetLocation());
 	RightHandComponent->SetRelativeRotation(AimOffset.GetRotation());
 	//DrawDebugLine(GetWorld(), RightHandSocket->GetComponentTransform().GetLocation(), RightHandSocket->GetComponentLocation() + AimOffset.GetLocation(), FColor::Red, false, 0.28f);

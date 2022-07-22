@@ -11,8 +11,8 @@
 #include "Camera/CameraComponent.h"
 #include "Math/UnrealMathUtility.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Engine/EngineTypes.h"
 #include "Components/SceneComponent.h"
-
 
 #include "FPS_Character.generated.h"
 
